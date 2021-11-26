@@ -28,10 +28,8 @@ public class SnowflakeEdge {
         int endY = (int) Math.round(end.getY());
         
         double length = Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
-        double slope = (endY - startY) / (endX - startX);
-        double perpendicularSlope = - 1 / slope;
 
-        if (length < 2) {
+        if (length < 5) {
             g.drawLine(startX, startY, endX, endY);
         }
         else {
@@ -49,21 +47,23 @@ public class SnowflakeEdge {
             Point twoThird = new Point(twoThirdX, twoThirdY);
 
             // find the peak of the snowflake edge
-            int peakX = (int) Math.round(perpendicularSlope * (length * ROOT3 / 6)) + midX;
-            int peakY = (int) Math.round(perpendicularSlope * (length * ROOT3 / 6)) + midY;
+            int peakX = (int) Math.round(midX - (midY - oneThirdY) * ROOT3);
+            int peakY = (int) Math.round(midY + (midX - oneThirdX) * ROOT3);
             Point peak = new Point(peakX, peakY);
 
             // draw line from start to one third point
-            g.drawLine(startX, startY, oneThirdX, oneThirdY);
+            // g.drawLine(startX, startY, oneThirdX, oneThirdY);
+            draw(g, start, oneThird, color);
 
             // draw two edges
-            g.drawLine(oneThirdX, oneThirdY, peakX, peakY);
-            g.drawLine(peakX, peakY, twoThirdX, twoThirdY);
-            // draw(g, oneThird, peak, color);
-            // draw(g, peak, twoThird, color);
+            // g.drawLine(oneThirdX, oneThirdY, peakX, peakY);
+            // g.drawLine(peakX, peakY, twoThirdX, twoThirdY);
+            draw(g, oneThird, peak, color);
+            draw(g, peak, twoThird, color);
 
             // draw line from two thirds point to end
-            g.drawLine(twoThirdX, twoThirdY, endX, endY);
+            // g.drawLine(twoThirdX, twoThirdY, endX, endY);
+            draw(g, twoThird, end, color);
         }
     }
 
