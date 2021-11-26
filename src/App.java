@@ -23,6 +23,7 @@ public class App {
     private DecimalFormat speedFormatter = new DecimalFormat("0.0");
 
     private KochSnowflake snowflake;
+    private KochSnowflake innerSnowflake;
 
     private App(int canvasSize) {
         frame = new JFrame();
@@ -31,6 +32,7 @@ public class App {
         frame.setVisible(true);
 
         snowflake = new KochSnowflake(new Point(canvasSize/2, canvasSize/2), 300, Color.BLUE);
+        innerSnowflake = new KochSnowflake(new Point(canvasSize/2, canvasSize/2), 100, Color.RED);
 
         panel = new JPanel() {
             @Override
@@ -39,6 +41,7 @@ public class App {
 
                 g.setColor(Color.BLACK);
                 snowflake.draw(g);
+                innerSnowflake.draw(g);
             }
         };
 
@@ -67,6 +70,7 @@ public class App {
             @Override
             public void actionPerformed(ActionEvent e) {
                 snowflake.rotate(rotationSpeed);
+                innerSnowflake.rotate(-rotationSpeed);
                 panel.repaint();
             }
         });
