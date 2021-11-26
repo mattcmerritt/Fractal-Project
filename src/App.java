@@ -1,6 +1,8 @@
 import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
@@ -8,6 +10,8 @@ public class App {
 
     private JFrame frame;
     private JPanel panel;
+
+    private Timer timer;
 
     private KochSnowflake snowflake;
 
@@ -28,6 +32,16 @@ public class App {
                 snowflake.draw(g);
             }
         };
+
+        timer = new Timer(25, null);
+        timer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                snowflake.rotate(0.05);
+                panel.repaint();
+            }
+        });
+        timer.start();
 
         panel.setBackground(Color.WHITE);
         frame.add(panel);

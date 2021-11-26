@@ -33,4 +33,16 @@ public class KochSnowflake {
         e3.draw(g);
     }
 
+    public void rotate(double angle) {
+        rotatePoint(p1, angle);
+        rotatePoint(p2, angle);
+        rotatePoint(p3, angle);
+    }
+
+    private void rotatePoint(Point p, double angle) {
+        int newX = (int) Math.round((p.getX() - origin.getX()) * Math.cos(angle) - (p.getY() - origin.getY()) * Math.sin(angle) + origin.getX());
+        int newY = (int) Math.round((p.getY() - origin.getY()) * Math.cos(angle) + (p.getX() - origin.getX()) * Math.sin(angle) + origin.getY());
+
+        p.setLocation(newX, newY);
+    }
 }
