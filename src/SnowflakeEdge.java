@@ -29,13 +29,23 @@ public class SnowflakeEdge {
         double length = Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
 
         if (length < 2) {
-            g.drawLine((int) Math.round(start.getX()), (int) Math.round(start.getY()), (int) Math.round(end.getX()), (int) Math.round(end.getY()));
+            g.drawLine(startX, startY, endX, endY);
         }
         else {
-            g.drawLine((int) Math.round(start.getX()), (int) Math.round(start.getY()), (int) Math.round(end.getX()), (int) Math.round(end.getY()));
-            // draw line from start to one third point
+            // draw line from start to one third point using a weighted average
+            int oneThirdX = (int) Math.round(startX * (2.0 / 3.0) + endX  * (1.0 / 3.0));
+            int oneThirdY = (int) Math.round(startY * (2.0 / 3.0) + endY  * (1.0 / 3.0));
+
+            g.drawLine(startX, startY, oneThirdX, oneThirdY);
+
             // draw two edges
-            // draw line from two thirds point to end
+            
+
+            // draw line from two thirds point to end using a weighted average
+            int twoThirdX = (int) Math.round(startX * (1.0 / 3.0) + endX  * (2.0 / 3.0));
+            int twoThirdY = (int) Math.round(startY * (1.0 / 3.0) + endY  * (2.0 / 3.0));
+
+            g.drawLine(twoThirdX, twoThirdY, endX, endY);
         }
     }
 
