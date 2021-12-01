@@ -1,4 +1,3 @@
-import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Color;
 
@@ -18,9 +17,9 @@ public class KochSnowflake {
 
         // sideLength = radius * ROOT3;
 
-        this.p1 = new Point((int) Math.round(origin.getX() - radius / 2 * ROOT3), (int) Math.round(origin.getY() + radius / 2));
-        this.p2 = new Point((int) Math.round(origin.getX() + radius / 2 * ROOT3), (int) Math.round(origin.getY() + radius / 2));
-        this.p3 = new Point((int) Math.round(origin.getX()), (int) Math.round(origin.getY() - radius));
+        this.p1 = new Point(origin.getX() - radius / 2 * ROOT3, origin.getY() + radius / 2);
+        this.p2 = new Point(origin.getX() + radius / 2 * ROOT3, origin.getY() + radius / 2);
+        this.p3 = new Point(origin.getX(), origin.getY() - radius);
 
         this.e1 = new SnowflakeEdge(p1, p2, this.color);
         this.e2 = new SnowflakeEdge(p2, p3, this.color);
@@ -40,8 +39,8 @@ public class KochSnowflake {
     }
 
     private void rotatePoint(Point p, double angle) {
-        int newX = (int) Math.round((p.getX() - origin.getX()) * Math.cos(angle) - (p.getY() - origin.getY()) * Math.sin(angle) + origin.getX());
-        int newY = (int) Math.round((p.getY() - origin.getY()) * Math.cos(angle) + (p.getX() - origin.getX()) * Math.sin(angle) + origin.getY());
+        double newX = (p.getX() - origin.getX() * Math.cos(angle) - (p.getY() - origin.getY()) * Math.sin(angle) + origin.getX());
+        double newY = (p.getY() - origin.getY() * Math.cos(angle) + (p.getX() - origin.getX()) * Math.sin(angle) + origin.getY());
 
         p.setLocation(newX, newY);
     }
