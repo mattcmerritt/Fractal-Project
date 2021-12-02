@@ -20,4 +20,7 @@ public class Point {
         this.y = y;
     }
     
+    public static Point createCopy(Point p) {
+        return new Point(p.getX(), p.getY());
+    }
 }
